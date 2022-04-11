@@ -6,3 +6,24 @@ CREATE TABLE IF NOT EXISTS accounts(
   email varchar(255) COMMENT 'User Email',
   picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8 COMMENT '';
+CREATE TABLE IF NOT EXISTS trips(
+  id INT AUTO_INCREMENT primary key,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+  title TEXT NOT NULL,
+  creatorId VARCHAR(255) NOT NULL,
+  FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+) default charset utf8 COMMENT '';
+CREATE TABLE IF NOT EXISTS reservations(
+  id INT AUTO_INCREMENT primary key,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+  type TEXT NOT NULL,
+  name TEXT NOT NULL,
+  confirmNum TEXT NOT NULL,
+  address TEXT NOT NULL,
+  date DATETIME NOT NULL,
+  cost INT NOT NULL,
+  tripId INT NOT NULL,
+  FOREIGN KEY (tripId) REFERENCES trips (id) ON DELETE CASCADE
+) default charset utf8 COMMENT '';
