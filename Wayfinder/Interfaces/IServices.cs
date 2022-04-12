@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace Wayfinder.Interfaces
 {
-  public interface IServices<T, Tid>
+  public interface IServices<T>
   {
     List<T> GetAll();
-    T GetById(Tid id);
-    T Create(T data);
-    T Edit(T data);
-    string Delete(Tid id);
+    T GetById(int id);
+    T Create(string userId, T data);
+    T Edit(string userId, T data);
+    void Delete(string userId, int id);
 
   }
 }

@@ -8,6 +8,6 @@ namespace Wayfinder.Interfaces
     T GetById(Tid id);
     T Create(T data);
     T Edit(T data);
-    string Delete(Tid id);
+    void Delete(Tid id);
   }
 }

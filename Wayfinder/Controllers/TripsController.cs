@@ -11,21 +11,21 @@ namespace Wayfinder.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class ReservationsController : ControllerBase
+  public class TripsController : ControllerBase
   {
-    private readonly ReservationsService _resService;
+    private readonly TripsService _resService;
 
-    public ReservationsController(ReservationsService resService)
+    public TripsController(TripsService resService)
     {
       _resService = resService;
     }
     [HttpGet]
-    public ActionResult<List<Reservation>> GetAll()
+    public ActionResult<List<Trip>> GetAll()
     {
       try
       {
-        List<Reservation> reservations = _resService.GetAll();
-        return Ok(reservations);
+        List<Trip> trips = _resService.GetAll();
+        return Ok(trips);
       }
       catch (Exception e)
       {
@@ -33,12 +33,12 @@ namespace Wayfinder.Controllers
       }
     }
     [HttpGet("{id}")]
-    public ActionResult<Reservation> GetById(int id)
+    public ActionResult<Trip> GetById(int id)
     {
       try
       {
-        Reservation reservation = _resService.GetById(id);
-        return Ok(reservation);
+        Trip trip = _resService.GetById(id);
+        return Ok(trip);
       }
       catch (Exception e)
       {
@@ -47,13 +47,13 @@ namespace Wayfinder.Controllers
     }
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<Reservation>> Create([FromBody] Reservation reservationData)
+    public async Task<ActionResult<Trip>> Create([FromBody] Trip tripData)
     {
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        Reservation reservation = _resService.Create(userInfo.Id, reservationData);
-        return Created($"api/reservations/{reservation.Id}", reservation);
+        Trip trip = _resService.Create(userInfo.Id, tripData);
+        return Created($"api/trips/{trip.Id}", trip);
       }
       catch (Exception e)
       {
@@ -62,14 +62,14 @@ namespace Wayfinder.Controllers
     }
     [HttpPut("{id}")]
     [Authorize]
-    public async Task<ActionResult<Reservation>> Edit(int id, [FromBody] Reservation updateData)
+    public async Task<ActionResult<Trip>> Edit(int id, [FromBody] Trip updateData)
     {
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         updateData.Id = id;
-        Reservation update = _resService.Edit(userInfo.Id, updateData);
-        return Created($"api/reservations/{update.Id}", update);
+        Trip update = _resService.Edit(userInfo.Id, updateData);
+        return Created($"api/trips/{update.Id}", update);
       }
       catch (Exception e)
       {

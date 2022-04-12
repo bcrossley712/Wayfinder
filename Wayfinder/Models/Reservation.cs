@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Wayfinder.Models
 {
@@ -13,5 +12,7 @@ namespace Wayfinder.Models
     public int Cost { get; set; }
     public int TripId { get; set; }
 
+
+    public Trip Trip { get; set; }
   }
 }
